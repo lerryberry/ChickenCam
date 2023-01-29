@@ -13,7 +13,7 @@ getJSON(){
 # check if it's now daytime 
 camSelector(){
     now=$(date +%s)
-    if [ $now -gt $(date --date "$(getJSON "sunrise" "times") $(localtime\:%d/%m/%y)" +%s) ] && [ $now -lt $(date --date "$(getJSON "sunset" "times") $(localtime\:%d/%m/%y)"  +%s) ]
+    if [ $now -gt $(date --date $(getJSON "sunrise" "times") +%s) ] && [ $now -lt $(date --date $(getJSON "sunset" "times") +%s) ]
     then
         echo "day"
     else
@@ -31,7 +31,7 @@ startStream(){
         -i $(getJSON $cam".micInput" "config") \
                 -c:a aac \
                 -c:v $(getJSON $cam".recordFormat" "config") -video_size $(getJSON $cam".resolution" "config") \
-        -i /dev/video"$(getJSON $cam".sourceNum" "config")" \
+        -i /dev/video$(getJSON $cam".sourceNum" "config") \
                 -hide_banner -loglevel $(getJSON "logLevel" "config") \
                 -c:v libx264 -preset ultrafast -threads 0 -profile:v high -bf 2 -g 12 -b:v $(getJSON "stream.bitrate" "config") -pix_fmt yuv420p \
                 -vf "drawtext=fontfile=LDFComicSans.ttf: text='$(getJSON "stream.caption" "config") %{localtime\:%T\ %d/%m/%y}': fontcolor=white: box=1: boxcolor=black: x=(w-text_w)/2:y=h-th-10" \
