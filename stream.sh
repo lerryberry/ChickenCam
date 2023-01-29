@@ -6,6 +6,7 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 
 # helper function to get values from .json files
 getJSON(){
+    [ ! -f times.json ] && source setTimes.sh
     echo $(jq -r .$1 $2.json)
 }
 
