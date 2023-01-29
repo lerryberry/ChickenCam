@@ -13,7 +13,7 @@ getJSON(){
 # check if it's now daytime 
 camSelector(){
     now=$(date +%s)
-    if [ $now -gt $(date --date $(getJSON "sunrise" "times") +%s) ] && [ $now -lt $(date --date $(getJSON "sunset" "times") +%s) ]
+    if [ $now -gt $(date --date "$(getJSON "results.sunrise" "times")" +%s) ] && [ $now -lt $(date --date "$(getJSON "results.sunset" "times")" +%s) ]
     then
         echo "day"
     else
@@ -23,15 +23,15 @@ camSelector(){
 
 startStream(){
     # decide which camera 
-    cam="cameras.$(camSelector)"
+    cam="cameras.$(camSelector)".
 
     #start new ffmpeg and write to currentCam.txt if it was successful
     $(
         /usr/bin/ffmpeg -f  \
-        -i $(getJSON $cam".micInput" "config") \
+        -i $(getJSON $cam"micInput" "config") \
                 -c:a aac \
-                -c:v $(getJSON $cam".recordFormat" "config") -video_size $(getJSON $cam".resolution" "config") \
-        -i /dev/video$(getJSON $cam".sourceNum" "config") \
+                -c:v $(getJSON $cam"recordFormat" "config") -video_size $(getJSON $cam"resolution" "config") \
+        -i /dev/video$(getJSON $cam"sourceNum" "config") \
                 -hide_banner -loglevel $(getJSON "logLevel" "config") \
                 -c:v libx264 -preset ultrafast -threads 0 -profile:v high -bf 2 -g 12 -b:v $(getJSON "stream.bitrate" "config") -pix_fmt yuv420p \
                 -vf "drawtext=fontfile=LDFComicSans.ttf: text='$(getJSON "stream.caption" "config") %{localtime\:%T\ %d/%m/%y}': fontcolor=white: box=1: boxcolor=black: x=(w-text_w)/2:y=h-th-10" \
