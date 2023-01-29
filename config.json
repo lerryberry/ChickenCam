@@ -16,7 +16,7 @@
       "recordFormat": "mjpeg"
     },
     "night": {
-      "sourceNum": 1,
+      "sourceNum": 2,
       "micInput": "anullsrc",
       "resolution": "test",
       "recordFormat": "test"
