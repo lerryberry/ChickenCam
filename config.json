@@ -1,0 +1,26 @@
+{
+  "coordinates": {
+    "lat": -28.840866,
+    "lon": 153.449584
+  },
+  "stream": {
+    "bitrate": "1500K",
+    "server": "rtmp://a.rtmp.youtube.com/live2/wdwy-z11k-r4pc-gjhy-250w",
+    "caption": "Chicken Cam"
+  },
+  "cameras": {
+    "day": {
+      "sourceNum": 0,
+      "micInput": "alsa_input.usb-DSJ_UC60_Video_200901010001-02.analog-stereo",
+      "resolution": "640x480",
+      "recordFormat": "mjpeg"
+    },
+    "night": {
+      "sourceNum": 1,
+      "micInput": "anullsrc",
+      "resolution": "test",
+      "recordFormat": "test"
+    }
+  },
+  "logLevel": "debug"
+}
