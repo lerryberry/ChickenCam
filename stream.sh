@@ -13,7 +13,7 @@ getJSON(){
 # check if it's now daytime 
 camSelector(){
     now=$(date +%s)
-    if [ $now -gt $(date --date "$(getJSON "results.sunrise" "times")" +%s) ] && [ $now -lt $(date --date "$(getJSON "results.sunset" "times")" +%s) ]
+    if [ $now -gt $(date --date "$(getJSON "results.sunrise" "times")" +%s) ]  && [  $now -lt $(date --date "$(getJSON "results.sunset" "times")" +%s) ]
     then
         echo "day"
     else
@@ -23,12 +23,13 @@ camSelector(){
 
 startStream(){
     # decide which camera 
-    cam="cameras.$(camSelector)".
-
+    cam="cameras."$(camSelector)"."
+    # set mic, otherwise set dummy null src
+    mic=$(getJSON $cam"micInput" "config")
     #start new ffmpeg and write to currentCam.txt if it was successful
     $(
-        /usr/bin/ffmpeg -f  \
-        -i $(getJSON $cam"micInput" "config") \
+        /usr/bin/ffmpeg -f $([ $mic = "anullsrc" ] && echo "lavfi" || echo "pulse") \
+        -i $mic \
                 -c:a aac \
                 -c:v $(getJSON $cam"recordFormat" "config") -video_size $(getJSON $cam"resolution" "config") \
         -i /dev/video$(getJSON $cam"sourceNum" "config") \
@@ -43,7 +44,7 @@ startStream(){
 
 init(){
     # if there's no cam running, start one
-    if [ -z $(pgrep "ffmpeg") ] 
+    if [ -z $(pgrep "ffmpeg") ]
     then
         startStream
     # otherwise, if it's the wrong cam, kill it
@@ -52,4 +53,3 @@ init(){
         $(pkill "ffmpeg" && > currentCam.txt)
     fi
 }
-init
