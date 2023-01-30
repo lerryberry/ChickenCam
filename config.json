@@ -11,16 +11,16 @@
   "cameras": {
     "day": {
       "sourceNum": 0,
-      "micInput": "alsa_input.usb-DSJ_UC60_Video_200901010001-02.analog-stereo",
-      "resolution": "640x480",
+      "micInput": "anullsrc",
+      "resolution": "1280x720",
       "recordFormat": "mjpeg"
     },
     "night": {
       "sourceNum": 2,
       "micInput": "anullsrc",
-      "resolution": "test",
-      "recordFormat": "test"
+      "resolution": "1280x720",
+      "recordFormat": "mjpeg"
     }
   },
-  "logLevel": "debug"
+  "logLevel": "info"
 }
