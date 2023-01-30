@@ -53,3 +53,4 @@ init(){
         $(pkill "ffmpeg" && > currentCam.txt)
     fi
 }
+init
