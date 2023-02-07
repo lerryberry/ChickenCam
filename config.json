@@ -5,7 +5,7 @@
   },
   "stream": {
     "bitrate": "1500K",
-    "server": "rtmp://a.rtmp.youtube.com/live2/wdwy-z11k-r4pc-gjhy-250w",
+    "server": "",
     "caption": "Chicken Cam"
   },
   "cameras": {
