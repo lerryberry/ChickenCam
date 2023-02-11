@@ -11,7 +11,7 @@ Runs every morning at 2am, and gets the gps coordinates set `config.json`, then 
 ``` 0 2 * * * cd /home/<user>/Scripts/ChickenCam && ./setTimes.sh 2>> /home/<user>/Scripts/ChickenCam/err.log```
 
 ## stream.sh
-Runs every minute, and starts a new streaming process if one isn't already running. Otherwise, it kills the process if it's the wrong one by calculating which camera the correct one is, and comparing it to the value stored in `currentCam.txt`. If the stream was killed, it will be started again when the script next runs in under 1 minute.
+Runs every minute, and starts a new streaming process if one isn't already running. Otherwise, it kills the process if it's the wrong one by re-calculating which camera the correct one is, and comparing the calculated value to the stored value in `currentCam.txt`. If the stream was killed, it will be started again when the script next runs in under 1 minute.
 
 *Cron job*
 ```* * * * * cd /home/<user>/Scripts/ChickenCam && ./stream.sh 2>> /home/<user>/Scripts/ChickenCam/err.log```
