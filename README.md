@@ -8,20 +8,20 @@ All user configurations are stored in `config.json`, all sunrise and sunset time
 Runs every morning at 2am, and gets the gps coordinates set `config.json`, then requests the local sunrise and sunset times from the `api.sunrisesunset.io`, and stores the full response into `times.json`.
 
 *Cron job*
-``` 0 2 * * * cd /home/<user>/Scripts/ChickenCam && ./setTimes.sh 2>> /home/<user>/Scripts/ChickenCam/err.log```
+``` 0 2 * * * cd /home/<user>/Scripts/ChickenCam && ./setTimes.sh 2>> /home/<user>/ChickenCam/err.log```
 
 ## stream.sh
 Runs every minute, and starts a new streaming process if one isn't already running. Otherwise, it kills the process if it's the wrong one by re-calculating which camera the correct one is, and comparing the calculated value to the stored value in `currentCam.txt`. If the stream was killed, it will be started again when the script next runs in under 1 minute.
 
 *Cron job*
-```* * * * * cd /home/<user>/Scripts/ChickenCam && ./stream.sh 2>> /home/<user>/Scripts/ChickenCam/err.log```
+```* * * * * cd /home/<user>/Scripts/ChickenCam && ./stream.sh 2>> /home/<user>/ChickenCam/err.log```
 
 ## Setup / Dependencies
 - Install each of the following:
-```ffmpeg, jq & pulse```
+```ffmpeg, jq & pulseaudio```
 - make scripts executable 
 ```chmod +x stream.sh```
 ```chmod +x setTimes.sh```
 - Plug in your cameras and update `config.json` accordingly, infromation can be found by running:
 
-```for d in /dev/video* \; do echo $d ; v4l2-ctl --device=$d -D --list-formats  ; echo '===============' ; done /dev/video0```
+```v4l2-ctl --list-devices```
