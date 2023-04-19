@@ -22,6 +22,4 @@ Runs every minute, and starts a new streaming process if one isn't already runni
 - make scripts executable 
 ```chmod +x stream.sh```
 ```chmod +x setTimes.sh```
-- Plug in your cameras and update `config.json` accordingly, infromation can be found by running:
-
-```v4l2-ctl --list-devices```
+- Plug in your cameras and update `config.json` accordingly, infromation can be found by running: ```v4l2-ctl --list-devices```
