@@ -19,6 +19,8 @@ Runs every minute, and starts a new streaming process if one isn't already runni
 ## Setup / Dependencies
 - Install each of the following:
 ```ffmpeg, jq & pulseaudio```
+- Download this repo 
+`git clone https://github.com/lerryberry/ChickenCamBackup.git`
 - make scripts executable 
 ```chmod +x stream.sh```
 ```chmod +x setTimes.sh```
