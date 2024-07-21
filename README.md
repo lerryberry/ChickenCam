@@ -18,7 +18,7 @@ Runs every minute, and starts a new streaming process if one isn't already runni
 
 ## Setup / Dependencies
 - Install each of the following:
-```ffmpeg, jq & pulseaudio```
+```ffmpeg, jq & pulseaudio, git```
 - Download this repo 
 `git clone https://github.com/lerryberry/ChickenCam.git`
 - make scripts executable 
